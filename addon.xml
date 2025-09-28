@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.image.flickr" name="flickr" version="1.1.2" provider-name="Rick Phillips (ruuk)">
+<addon id="plugin.image.flickr" name="flickr" version="2.0.0" provider-name="Community Modernization">
 	<requires>
-		<import addon="xbmc.python" version="2.1.0" />
-		<import addon="script.module.elementtree" version="1.2.7" />
-		<import addon="script.module.oauth.helper" version="0.0.7"/>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.requests" version="2.25.1" />
+		<import addon="script.module.pydantic" version="1.8.2" optional="true" />
 	</requires>
 
-	<extension point="xbmc.python.pluginsource" library="default.py">
+	<extension point="xbmc.python.pluginsource" library="main.py">
 		<provides>image</provides>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary lang="en">flickrXBMC: flickr on XBMC</summary>
-		<summary lang="de">flickrXBMC: flickr in XBMC</summary>
-		<summary lang="es">flickrXBMC: flickr en XBMC</summary>
-		<summary lang="nl">flickrXBMC: Flickr op XBMC</summary>
-		<description>flickrXBMC allows you to: Browse your photostream, collections, sets, galleries, tags, places, and favorites. Browse your contacts and their content. Search your or your contacts photostream, or search flickr.</description>
-		<description lang="de">flickrXBMC ermöglicht Fotostreams, Sammlungen, Sets, Gallerien, Tags, Orte und Favoriten zu dursuchen. Durchsuche deine Freunde und deren Fotos. Durchsuche deine Fotos oder die deiner Freunde, oder durchsuche flickr allgemein.</description>
-		<description lang="es">flickrXBMC le permite: Busca en tu galería de fotos, colecciones, conjuntos, galerías, etiquetas, lugares, y favoritos. Busque sus contactos y su contenido. Buscar contactos que usted o su galería de fotos, o flickr de búsqueda.</description>
-		<description lang="nl">flickrXBMC geeft u de mogelijkheid om te bladeren door uw photostreams, verzamelingen, sets, galerijen, tags, plaatsen en favorieten. Bekijk uw contacten en hun foto's. Zoek door uw eigen of van uw contacts de photostreams of door geheel Flickr.</description>
 		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-		<forum>http://forum.xbmc.org/showthread.php?tid=81593</forum>
-		<source>http://github.com/ruuk/plugin.image.flickr</source>
+		<reuselanguageinvoker>true</reuselanguageinvoker>
+		<language>en de es nl</language>
+		<license>GPL-3.0-or-later</license>
+		<forum>https://forum.kodi.tv/showthread.php?tid=155534</forum>
+		<website>https://github.com/barrelhawk/plugin.image.flickr</website>
+		<source>https://github.com/barrelhawk/plugin.image.flickr</source>
+		<email>support@example.com</email>
+		
+		<summary lang="en_GB">Modern Flickr Photo Browser</summary>
+		<summary lang="de_DE">Moderner Flickr Foto-Browser</summary>
+		<summary lang="es_ES">Navegador Moderno de Fotos Flickr</summary>
+		<summary lang="nl_NL">Moderne Flickr Foto Browser</summary>
+		
+		<description lang="en_GB">Browse and view photos from Flickr with modern OAuth 2.0 authentication. Features include photostream browsing, collections, sets, galleries, tags, places, favorites, contact browsing, and advanced search capabilities. Compatible with Kodi Matrix/Nexus/Omega.</description>
+		<description lang="de_DE">Durchsuchen und betrachten Sie Fotos von Flickr mit moderner OAuth 2.0-Authentifizierung. Funktionen umfassen Photostream-Durchsuchen, Sammlungen, Sets, Galerien, Tags, Orte, Favoriten, Kontakt-Durchsuchen und erweiterte Suchfunktionen.</description>
+		<description lang="es_ES">Explore y visualice fotos de Flickr con autenticación OAuth 2.0 moderna. Las características incluyen navegación de photostream, colecciones, conjuntos, galerías, etiquetas, lugares, favoritos, navegación de contactos y capacidades de búsqueda avanzada.</description>
+		<description lang="nl_NL">Blader door en bekijk foto's van Flickr met moderne OAuth 2.0-authenticatie. Functies omvatten photostream browsing, verzamelingen, sets, galerijen, tags, plaatsen, favorieten, contacten browsing en geavanceerde zoekmogelijkheden.</description>
+		
+		<disclaimer lang="en_GB">Requires Flickr API credentials. Some features require user authentication.</disclaimer>
+		
+		<assets>
+			<icon>resources/images/icon.png</icon>
+			<fanart>resources/images/fanart.jpg</fanart>
+		</assets>
+		
+		<news>
+			v2.0.0 (2025-09-28)
+			- Complete modernization for Python 3 and Kodi Matrix/Nexus/Omega
+			- OAuth 2.0 authentication with PKCE security
+			- Modern async HTTP client with better error handling
+			- Enhanced UI with latest Kodi features
+			- Improved caching and performance
+			- Multi-language support
+		</news>
 	</extension>
 </addon>

@@ -1,30 +1,190 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
+<settings version="1">
+    <!-- Authentication -->
+    <category id="authentication" label="30100" help="30101">
+        <group id="auth_config" label="30110">
+            <setting id="auth_method" type="select" label="30111" help="30112" default="oauth2">
+                <constraints>
+                    <options>
+                        <option label="30113">oauth2</option>
+                        <option label="30114">api_key</option>
+                    </options>
+                </constraints>
+            </setting>
 
-  <!-- General -->
-  <category label="30200">
-    <setting id="flickr_username" type="text" label="30001" default="" enable="eq(1,false)"/>
-    <setting id="authenticate" type="bool" label="30013" default="false" />
-    <setting label="30014" type="action" subsetting="true" action="RunScript(plugin.image.flickr,reset_auth)" option="close" enable="eq(-1,true)" />
-    <setting id="network_token_path" type="folder" option="writeable" subsetting="true" label="Network Token Save Path (Optional)" enable="eq(-2,true)" />
-    <setting type="sep" />
-    <setting id="max_per_page" type="enum" label="30004" values="10|20|30|40|50|75|100|200|500" default="4" />
-    <setting id="default_thumb_size" type="enum" label="30002" lvalues="30100|30101|30102|30103|30104|30105|30106" default="1" />
-    <setting id="default_display_size" type="enum" label="30003" lvalues="30100|30101|30102|30103|30104|30105|30106" default="5" />
-    <setting id="video_display_size" type="enum" label="30524" lvalues="30525|30526|30527|30528" default="1" />
-    <setting id="save_path" type="folder"  source="local" label="30400" />
-  </category>
-  <category label="30201">
-	<setting label="30254" type="lsep" />
-    <setting id="default_map_source" type="enum" label="30005" values="Google|Yahoo|Open Street Map" default="0" />
-    <setting id="default_map_type" type="enum" label="30012" values="Hybrid|Satellite|Terrain|Roadmap" default="0" />
-    <setting label="30253" type="lsep" />
-    <setting id="enable_maps" type="bool" label="30011" default="true" />
-    <setting id="country_zoom" type="enum" label="30006" values="0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21" default="2" enable="eq(-1,true)"/>
-    <setting id="region_zoom" type="enum" label="30007" values="0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21" default="4" enable="eq(-2,true)"/>
-    <setting id="locality_zoom" type="enum" label="30008" values="0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21" default="9" enable="eq(-3,true)"/>
-    <setting id="neighborhood_zoom" type="enum" label="30009" values="0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21" default="13" enable="eq(-4,true)"/>
-    <setting type="sep" />
-    <setting id="photo_zoom" type="enum" label="30010" values="0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21" default="15" />
-  </category>
+            <setting id="client_id" type="string" label="30120" help="30121" default=""
+                     visible="eq(-1,oauth2)" enable="true">
+                <constraints>
+                    <allowempty>false</allowempty>
+                </constraints>
+            </setting>
+
+            <setting id="client_secret" type="string" label="30130" help="30131" default=""
+                     visible="eq(-2,oauth2)" enable="true" option="hidden">
+                <constraints>
+                    <allowempty>false</allowempty>
+                </constraints>
+            </setting>
+
+            <setting id="api_key" type="string" label="30140" help="30141" default=""
+                     visible="eq(-3,api_key)" enable="true">
+                <constraints>
+                    <allowempty>false</allowempty>
+                </constraints>
+            </setting>
+
+            <setting id="access_token" type="string" label="30150" help="30151" default=""
+                     visible="eq(-4,oauth2)" enable="false" option="hidden">
+            </setting>
+
+            <setting type="action" id="authenticate_now" label="30160" help="30161"
+                     visible="!eq(-1,)" enable="true" action="RunPlugin(plugin://plugin.image.flickr/?action=authenticate)"/>
+
+            <setting type="action" id="clear_auth" label="30170" help="30171"
+                     visible="!eq(-2,)" enable="true" action="RunPlugin(plugin://plugin.image.flickr/?action=clear_auth)"/>
+        </group>
+    </category>
+
+    <!-- Display Settings -->
+    <category id="display" label="30200" help="30201">
+        <group id="image_quality" label="30210">
+            <setting id="thumb_size" type="select" label="30211" help="30212" default="medium">
+                <constraints>
+                    <options>
+                        <option label="30213">small</option>
+                        <option label="30214">medium</option>
+                        <option label="30215">large</option>
+                    </options>
+                </constraints>
+            </setting>
+
+            <setting id="display_size" type="select" label="30220" help="30221" default="large">
+                <constraints>
+                    <options>
+                        <option label="30222">medium</option>
+                        <option label="30223">large</option>
+                        <option label="30224">original</option>
+                    </options>
+                </constraints>
+            </setting>
+
+            <setting id="items_per_page" type="slider" label="30230" help="30231"
+                     default="50" range="10,1,200" option="int"/>
+        </group>
+
+        <group id="ui_behavior" label="30240">
+            <setting id="auto_next_page" type="boolean" label="30241" help="30242" default="true"/>
+            <setting id="show_photo_info" type="boolean" label="30243" help="30244" default="true"/>
+            <setting id="enable_fanart" type="boolean" label="30245" help="30246" default="true"/>
+        </group>
+    </category>
+
+    <!-- Slideshow Settings -->
+    <category id="slideshow" label="30300" help="30301">
+        <group id="slideshow_config" label="30310">
+            <setting id="slideshow_duration" type="slider" label="30311" help="30312"
+                     default="5" range="1,1,30" option="int"/>
+
+            <setting id="slideshow_random" type="boolean" label="30320" help="30321" default="false"/>
+
+            <setting id="slideshow_transition" type="select" label="30330" help="30331" default="fade">
+                <constraints>
+                    <options>
+                        <option label="30332">none</option>
+                        <option label="30333">fade</option>
+                        <option label="30334">slide</option>
+                    </options>
+                </constraints>
+            </setting>
+
+            <setting id="slideshow_show_info" type="boolean" label="30340" help="30341" default="true"/>
+            <setting id="slideshow_full_screen" type="boolean" label="30350" help="30351" default="true"/>
+        </group>
+    </category>
+
+    <!-- Performance Settings -->
+    <category id="performance" label="30400" help="30401">
+        <group id="caching" label="30410">
+            <setting id="enable_caching" type="boolean" label="30411" help="30412" default="true"/>
+
+            <setting id="cache_duration" type="slider" label="30420" help="30421"
+                     default="24" range="1,1,168" option="int" visible="eq(-1,true)"/>
+
+            <setting id="max_cache_size" type="slider" label="30430" help="30431"
+                     default="100" range="10,10,1000" option="int" visible="eq(-2,true)"/>
+
+            <setting type="action" id="clear_cache" label="30440" help="30441"
+                     action="RunPlugin(plugin://plugin.image.flickr/?action=clear_cache)"/>
+        </group>
+
+        <group id="network" label="30450">
+            <setting id="concurrent_downloads" type="slider" label="30451" help="30452"
+                     default="5" range="1,1,20" option="int"/>
+
+            <setting id="request_timeout" type="slider" label="30460" help="30461"
+                     default="30" range="5,5,120" option="int"/>
+
+            <setting id="retry_attempts" type="slider" label="30470" help="30471"
+                     default="3" range="1,1,10" option="int"/>
+        </group>
+    </category>
+
+    <!-- Features -->
+    <category id="features" label="30500" help="30501">
+        <group id="downloads" label="30510">
+            <setting id="enable_download" type="boolean" label="30511" help="30512" default="false"/>
+
+            <setting id="download_path" type="folder" label="30520" help="30521"
+                     default="special://home/Downloads/Flickr" visible="eq(-1,true)"/>
+
+            <setting id="download_quality" type="select" label="30530" help="30531"
+                     default="large" visible="eq(-2,true)">
+                <constraints>
+                    <options>
+                        <option label="30532">medium</option>
+                        <option label="30533">large</option>
+                        <option label="30534">original</option>
+                    </options>
+                </constraints>
+            </setting>
+        </group>
+
+        <group id="favorites" label="30540">
+            <setting id="enable_favorites" type="boolean" label="30541" help="30542" default="true"/>
+            <setting id="sync_flickr_favorites" type="boolean" label="30550" help="30551" default="false"/>
+        </group>
+    </category>
+
+    <!-- Advanced -->
+    <category id="advanced" label="30600" help="30601">
+        <group id="logging" label="30610">
+            <setting id="debug_logging" type="boolean" label="30611" help="30612" default="false"/>
+
+            <setting id="log_level" type="select" label="30620" help="30621"
+                     default="info" visible="eq(-1,true)">
+                <constraints>
+                    <options>
+                        <option label="30622">debug</option>
+                        <option label="30623">info</option>
+                        <option label="30624">warning</option>
+                        <option label="30625">error</option>
+                    </options>
+                </constraints>
+            </setting>
+
+            <setting type="action" id="export_logs" label="30630" help="30631"
+                     action="RunPlugin(plugin://plugin.image.flickr/?action=export_logs)"/>
+        </group>
+
+        <group id="development" label="30640">
+            <setting id="api_base_url" type="string" label="30641" help="30642"
+                     default="https://api.flickr.com/services/rest"/>
+
+            <setting id="oauth_base_url" type="string" label="30650" help="30651"
+                     default="https://api.flickr.com/services/oauth2"/>
+
+            <setting type="action" id="run_diagnostics" label="30660" help="30661"
+                     action="RunPlugin(plugin://plugin.image.flickr/?action=diagnostics)"/>
+        </group>
+    </category>
 </settings>

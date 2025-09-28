@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyo
+
+# Kodi addon cache and temp files
+.kodi_backup/
+.kodi_temp/
+*.zip
+
+# Logs
+*.log
+debug.log
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*~
+
+# Test files (if any)
+test_*.py
+*_test.py
