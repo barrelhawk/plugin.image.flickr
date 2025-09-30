@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <setting id="authenticate" type="bool" default="true" label="30001" />
+  <setting id="api_key" type="text" default="" label="30002" />
+  <setting id="client_id" type="text" default="" label="30002a" />
+  <setting id="client_secret" type="text" default="" label="30002b" option="hidden"/>
+  <setting id="flickr_username" type="text" default="" label="30003" />
+  <setting id="network_token_path" type="folder" default="" label="30004" />
+  <setting type="sep" />
+  <setting id="default_thumb_size" type="enum" values="Square|Thumbnail|Small|Medium|Medium640|Large|Original" default="2" label="30005" />
+  <setting id="default_display_size" type="enum" values="Square|Thumbnail|Small|Medium|Medium640|Large|Original" default="5" label="30006" />
+  <setting id="max_per_page" type="enum" values="10|20|30|40|50|75|100|200|500" default="4" label="30007" />
+  <setting id="enable_maps" type="bool" default="false" label="30008" />
+  <setting id="video_display_size" type="enum" values="Mobile MP4|Site MP4|HD MP4|Video Original" default="1" label="30009" />
+  <setting type="lsep" label="30010" />
+  <setting id="default_map_source" type="enum" values="Google Maps|Yahoo Maps|Open Street Map" default="0" label="30011" />
+  <setting id="default_map_type" type="enum" values="Hybrid|Satellite|Terrain|Map" default="0" label="30012" />
+  <setting type="lsep" label="30013" />
+  <setting id="country_zoom" type="enum" values="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16" default="3" label="30016" />
+  <setting id="region_zoom" type="enum" values="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16" default="5" label="30017" />
+  <setting id="locality_zoom" type="enum" values="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16" default="9" label="30018" />
+  <setting id="neighborhood_zoom" type="enum" values="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16" default="12" label="30019" />
+  <setting id="photo_zoom" type="enum" values="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16" default="15" label="30020" />
+  <setting id="save_path" type="folder" default="" label="30022" />
+</settings>
