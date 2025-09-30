@@ -30,8 +30,8 @@
 		<disclaimer lang="en_GB">Requires Flickr API credentials. Some features require user authentication.</disclaimer>
 		
 		<assets>
-			<icon>resources/images/icon.png</icon>
-			<fanart>resources/images/fanart.jpg</fanart>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
 		</assets>
 		
 		<news>
